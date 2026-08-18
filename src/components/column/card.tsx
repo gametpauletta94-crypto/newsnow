@@ -4,6 +4,7 @@ import { AnimatePresence, motion, useInView } from "framer-motion"
 import { useWindowSize } from "react-use"
 import { forwardRef, useImperativeHandle } from "react"
 import { OverlayScrollbar } from "../common/overlay-scrollbar"
+import { activeCategoryAtom } from "~/atoms"
 import { safeParseString } from "~/utils"
 
 export interface ItemsProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -104,6 +105,13 @@ function NewsCard({ id, setHandleRef }: NewsCardProps) {
 
   const { isFocused, toggleFocus } = useFocusWith(id)
 
+  const activeCategory = useAtomValue(activeCategoryAtom)
+  const keywords = activeCategory?.keywords ?? []
+  const rawItems = data?.items ?? []
+  const items = keywords.length
+    ? rawItems.filter(it => keywords.some(k => (it.title ?? "").toLowerCase().includes(k.toLowerCase())))
+    : rawItems
+
   return (
     <>
       <div className={$("flex justify-between mx-2 mt-0 mb-2 items-center")}>
@@ -163,7 +171,13 @@ function NewsCard({ id, setHandleRef }: NewsCardProps) {
         defer
       >
         <div className={$("transition-opacity-500", isFetching && "op-20")}>
-          {!!data?.items?.length && (sources[id].type === "hottest" ? <NewsListHot items={data.items} /> : <NewsListTimeLine items={data.items} />)}
+          {!data
+            ? null
+            : items.length
+              ? (sources[id].type === "hottest" ? <NewsListHot items={items} /> : <NewsListTimeLine items={items} />)
+              : keywords.length > 0
+                ? <div className="p-4 text-sm text-neutral-400/70 text-center">该分类暂无相关新闻</div>
+                : null}
         </div>
       </OverlayScrollbar>
     </>

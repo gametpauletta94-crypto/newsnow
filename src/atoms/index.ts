@@ -38,3 +38,15 @@ export const goToTopAtom = atom({
   el: undefined as HTMLElement | undefined,
   fn: undefined as (() => void) | undefined,
 })
+
+export interface ActiveCategory {
+  id: string
+  name: string
+  keywords: string[]
+}
+
+/**
+ * 首页「我的关注」分类。选中后卡片层按 keywords 对新闻标题做客户端过滤。
+ * null 表示不筛选（显示全部新闻源）。
+ */
+export const activeCategoryAtom = atom<ActiveCategory | null>(null)
