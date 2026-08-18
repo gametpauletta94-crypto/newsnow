@@ -15,16 +15,22 @@ export interface DailyData {
 
 export interface GithubRepo {
   name: string
-  description?: string
-  stars?: number
-  starsToday?: number
-  language?: string
+  repo?: string
   url?: string
+  stars?: number
+  stars_today?: number
+  language?: string
+  category?: string
+  description?: string
+  personal_score?: number
+  why_watch?: string
+  recommended_action?: string
 }
 
 export interface GithubData {
-  updatedAt?: string
-  repos?: GithubRepo[]
+  date?: string
+  source?: string
+  projects?: GithubRepo[]
 }
 
 export interface TrendItem {
@@ -113,13 +119,44 @@ export async function loadDaily(): Promise<DailyData> {
 
 export async function loadGithub(): Promise<GithubData> {
   const d = await fetchJson<GithubData>("github.json")
-  if (!d) return { repos: [] }
-  return {
-    updatedAt: d.updatedAt ?? "",
-    repos: Array.isArray(d.repos)
-      ? d.repos.filter(r => r && r.name)
-      : [],
+  if (!d) return { projects: [] }
+  // 新 schema: projects[]；兼容旧 schema: repos[]/starsToday
+  let projects: GithubRepo[] = []
+  if (Array.isArray(d.projects)) {
+    projects = d.projects
+      .filter(p => p && p.name)
+      .map((p) => ({
+        name: p.name,
+        repo: p.repo ?? p.name,
+        url: p.url ?? (p.repo ? `https://github.com/${p.repo}` : "#"),
+        stars: p.stars ?? 0,
+        stars_today: p.stars_today ?? 0,
+        language: p.language ?? "",
+        category: p.category ?? "",
+        description: p.description ?? "",
+        personal_score: p.personal_score ?? 0,
+        why_watch: p.why_watch ?? "",
+        recommended_action: p.recommended_action ?? "",
+      }))
   }
+  else if (Array.isArray((d as any).repos)) {
+    projects = (d as any).repos
+      .filter((r: any) => r && r.name)
+      .map((r: any) => ({
+        name: r.name,
+        repo: r.name,
+        url: r.url ?? "#",
+        stars: r.stars ?? 0,
+        stars_today: r.starsToday ?? 0,
+        language: r.language ?? "",
+        category: "",
+        description: r.description ?? "",
+        personal_score: 0,
+        why_watch: "",
+        recommended_action: "",
+      }))
+  }
+  return { date: d.date ?? "", source: d.source ?? "", projects }
 }
 
 export async function loadTrend(): Promise<TrendData> {
