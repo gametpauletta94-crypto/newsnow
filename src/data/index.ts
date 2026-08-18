@@ -4,6 +4,11 @@ export interface TopEvent {
   title: string
   source?: string
   url?: string
+  published?: string
+  category?: string
+  impact?: number
+  personal_score?: number
+  why_watch?: string
 }
 
 export interface DailyData {
@@ -112,7 +117,18 @@ export async function loadDaily(): Promise<DailyData> {
     title: d.title ?? "今日 AI 摘要",
     summary: d.summary ?? "",
     topEvents: Array.isArray(d.topEvents)
-      ? d.topEvents.filter(e => e && e.title)
+      ? d.topEvents
+        .filter(e => e && e.title)
+        .map((e) => ({
+          title: e.title,
+          source: e.source ?? "",
+          url: e.url ?? "",
+          published: e.published ?? "",
+          category: e.category ?? "",
+          impact: e.impact ?? 0,
+          personal_score: e.personal_score ?? 0,
+          why_watch: e.why_watch ?? "",
+        }))
       : [],
   }
 }

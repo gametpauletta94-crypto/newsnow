@@ -1,4 +1,42 @@
-import { loadDaily, type DailyData } from "~/data"
+import { loadDaily, type DailyData, type TopEvent } from "~/data"
+
+function EventRow({ e }: { e: TopEvent }) {
+  const hasMeta = (e.impact ?? 0) > 0 || (e.personal_score ?? 0) > 0 || e.category
+  return (
+    <li className="rounded-xl p-3 bg-white/60 dark:bg-white/5 border border-primary/10 flex flex-col gap-1.5">
+      <div className="flex items-start gap-2">
+        {e.url
+          ? (
+            <a href={e.url} target="_blank" rel="noreferrer" className="text-sm font-medium op-90 hover:underline flex-1">
+              {e.title}
+            </a>
+            )
+          : <span className="text-sm font-medium op-90 flex-1">{e.title}</span>}
+        {e.source && <span className="text-xs op-50 shrink-0 whitespace-nowrap">{e.source}</span>}
+      </div>
+      {hasMeta && (
+        <div className="flex flex-wrap items-center gap-1.5">
+          {e.category && (
+            <span className="text-[11px] px-1.5 py-0.5 rounded bg-primary/10 text-primary font-medium">
+              {e.category}
+            </span>
+          )}
+          {(e.impact ?? 0) > 0 && (
+            <span className="text-[11px] px-1.5 py-0.5 rounded bg-orange-500/10 text-orange-500 font-medium">
+              影响 {e.impact}
+            </span>
+          )}
+          {(e.personal_score ?? 0) > 0 && (
+            <span className="text-[11px] px-1.5 py-0.5 rounded bg-green-500/10 text-green-600 font-medium">
+              评分 {e.personal_score}
+            </span>
+          )}
+        </div>
+      )}
+      {e.why_watch && <p className="text-xs op-60 leading-relaxed">{e.why_watch}</p>}
+    </li>
+  )
+}
 
 export function DailySummaryCard() {
   const [data, setData] = useState<DailyData | null>(null)
@@ -28,21 +66,9 @@ export function DailySummaryCard() {
         ? null
         : events.length > 0
           ? (
-            <ol className="flex flex-col gap-1.5">
-              {events.slice(0, 5).map((e, i) => (
-                <li key={i} className="text-sm flex gap-2 items-start">
-                  <span className="text-primary font-bold shrink-0">{i + 1}</span>
-                  {e.url
-                    ? (
-                      <a href={e.url} target="_blank" rel="noreferrer" className="op-90 hover:underline">
-                        {e.title}
-                      </a>
-                      )
-                    : <span className="op-90">{e.title}</span>}
-                  {e.source && <span className="text-xs op-50 ml-auto shrink-0 whitespace-nowrap">{e.source}</span>}
-                </li>
-              ))}
-            </ol>
+            <ul className="flex flex-col gap-2">
+              {events.slice(0, 6).map((e, i) => <EventRow key={i} e={e} />)}
+            </ul>
             )
           : <p className="text-xs op-50">暂无摘要数据</p>}
     </section>

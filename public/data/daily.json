@@ -1,32 +1,127 @@
 {
   "date": "2026-08-18",
   "title": "今日 AI 摘要",
-  "summary": "今日 AI 领域延续高速演进：大模型阵营在推理效率与多模态上持续突破，AI Agent 从单一工具调用走向多智能体协作，开源社区在训练框架与端侧推理上动作频繁，教育与具身智能等垂直场景加速落地。",
+  "summary": "今日共收录 12 条 AI 相关资讯，覆盖 AI模型、AI Agent、AI创业 等方向。重点包括：1) GPT-5.6 Sol Pricing Cut by 50%；2) Israel creates fake think tank in likely attempt to dupe AI chatbots；3) AI;DR (AI; Didn't Read)；4) Launch HN: Speko (YC S26) – OpenRouter for Voice AI。",
   "topEvents": [
     {
-      "title": "头部实验室发布新一代推理模型，长上下文与工具调用能力显著提升",
-      "source": "OpenAI",
-      "url": "https://openai.com"
+      "title": "GPT-5.6 Sol Pricing Cut by 50%",
+      "source": "Hacker News",
+      "url": "https://openrouter.ai/openai/gpt-5.6-sol",
+      "published": "Mon, 17 Aug 2026 21:03:18 +0000",
+      "category": "AI模型",
+      "impact": 5,
+      "personal_score": 5,
+      "why_watch": "关注「AI模型」方向：GPT、OpenAI、AI 相关动态，建议跟进其技术演进与落地信号。"
     },
     {
-      "title": "开源多智能体框架单周 star 破万，社区讨论集中在其可组合性",
-      "source": "GitHub",
-      "url": "https://github.com"
+      "title": "Israel creates fake think tank in likely attempt to dupe AI chatbots",
+      "source": "Hacker News",
+      "url": "https://responsiblestatecraft.org/israel-influence-chatgpt/",
+      "published": "Mon, 17 Aug 2026 20:46:10 +0000",
+      "category": "AI模型",
+      "impact": 4,
+      "personal_score": 5,
+      "why_watch": "关注「AI模型」方向：AI 相关动态，建议跟进其技术演进与落地信号。"
     },
     {
-      "title": "端侧小模型在消费级显卡实现实时多模态，落地成本大幅下降",
-      "source": "AI创业",
-      "url": ""
+      "title": "AI;DR (AI; Didn't Read)",
+      "source": "Hacker News",
+      "url": "https://www.rickmanelius.com/p/aidr-ai-didnt-read",
+      "published": "Mon, 17 Aug 2026 19:47:15 +0000",
+      "category": "AI模型",
+      "impact": 3,
+      "personal_score": 4,
+      "why_watch": "关注「AI模型」方向：AI 相关动态，建议跟进其技术演进与落地信号。"
     },
     {
-      "title": "教育赛道多家公司接入智能体批改与个性化辅导",
-      "source": "教育AI",
-      "url": ""
+      "title": "Launch HN: Speko (YC S26) – OpenRouter for Voice AI",
+      "source": "Hacker News",
+      "url": "https://speko.ai/",
+      "published": "Mon, 17 Aug 2026 15:36:18 +0000",
+      "category": "AI Agent",
+      "impact": 5,
+      "personal_score": 5,
+      "why_watch": "关注「AI Agent」方向：LLM、AI、Agent 相关动态，建议跟进其技术演进与落地信号。"
     },
     {
-      "title": "脑机接口与具身智能研究公布新里程碑论文",
-      "source": "未来科技",
-      "url": ""
+      "title": "The Defender’s Window",
+      "source": "OpenAI Blog",
+      "url": "https://openai.com/index/the-defenders-window",
+      "published": "Mon, 17 Aug 2026 05:30:00 GMT",
+      "category": "AI模型",
+      "impact": 4,
+      "personal_score": 5,
+      "why_watch": "关注「AI模型」方向：OpenAI、AI 相关动态，建议跟进其技术演进与落地信号。"
+    },
+    {
+      "title": "OpenAI joins PORTS-Pike project",
+      "source": "OpenAI Blog",
+      "url": "https://openai.com/index/openai-joins-ports-pike-project",
+      "published": "Mon, 17 Aug 2026 05:00:00 GMT",
+      "category": "AI模型",
+      "impact": 5,
+      "personal_score": 5,
+      "why_watch": "关注「AI模型」方向：OpenAI 相关动态，建议跟进其技术演进与落地信号。"
+    },
+    {
+      "title": "New policy ideas for the Intelligence Age",
+      "source": "OpenAI Blog",
+      "url": "https://openai.com/index/new-policy-ideas-for-the-intelligence-age",
+      "published": "Mon, 17 Aug 2026 03:15:00 GMT",
+      "category": "AI模型",
+      "impact": 4,
+      "personal_score": 5,
+      "why_watch": "关注「AI模型」方向：OpenAI、AI 相关动态，建议跟进其技术演进与落地信号。"
+    },
+    {
+      "title": "The builder’s guide to GPT‑5.6",
+      "source": "OpenAI Blog",
+      "url": "https://openai.com/index/builders-guide-to-gpt-5-6",
+      "published": "Thu, 13 Aug 2026 11:00:00 GMT",
+      "category": "AI Agent",
+      "impact": 5,
+      "personal_score": 5,
+      "why_watch": "关注「AI Agent」方向：GPT、AI、Agent 相关动态，建议跟进其技术演进与落地信号。"
+    },
+    {
+      "title": "Previewing Ultrafast mode: GPT-5.6 Sol at up to 14X the speed",
+      "source": "OpenAI Blog",
+      "url": "https://openai.com/index/previewing-ultrafast",
+      "published": "Thu, 13 Aug 2026 10:00:00 GMT",
+      "category": "AI模型",
+      "impact": 5,
+      "personal_score": 5,
+      "why_watch": "关注「AI模型」方向：GPT、OpenAI 相关动态，建议跟进其技术演进与落地信号。"
+    },
+    {
+      "title": "OpenAI appoints Dali Rajic as Chief Revenue Officer",
+      "source": "OpenAI Blog",
+      "url": "https://openai.com/index/dali-rajic-chief-revenue-officer",
+      "published": "Thu, 13 Aug 2026 09:00:00 GMT",
+      "category": "AI模型",
+      "impact": 5,
+      "personal_score": 5,
+      "why_watch": "关注「AI模型」方向：OpenAI、AI 相关动态，建议跟进其技术演进与落地信号。"
+    },
+    {
+      "title": "From assistance to execution: How enterprises put AI to work",
+      "source": "OpenAI Blog",
+      "url": "https://openai.com/index/how-enterprises-put-ai-to-work",
+      "published": "Wed, 12 Aug 2026 06:00:00 GMT",
+      "category": "AI Agent",
+      "impact": 5,
+      "personal_score": 5,
+      "why_watch": "关注「AI Agent」方向：OpenAI、AI、Agent 相关动态，建议跟进其技术演进与落地信号。"
+    },
+    {
+      "title": "How RingCentral builds AI-native work from engineering to ops",
+      "source": "OpenAI Blog",
+      "url": "https://openai.com/index/ringcentral",
+      "published": "Wed, 12 Aug 2026 00:00:00 GMT",
+      "category": "AI创业",
+      "impact": 4,
+      "personal_score": 5,
+      "why_watch": "关注「AI创业」方向：AI 相关动态，建议跟进其技术演进与落地信号。"
     }
   ]
 }
