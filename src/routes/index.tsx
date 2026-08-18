@@ -3,6 +3,7 @@ import { focusSourcesAtom } from "~/atoms"
 import { Column } from "~/components/column"
 import { WelcomeHeader } from "~/components/welcome-header"
 import { CategoryBar } from "~/components/category-bar"
+import { IntelSection } from "~/components/intel"
 
 export const Route = createFileRoute("/")({
   component: IndexComponent,
@@ -15,6 +16,7 @@ function IndexComponent() {
   return (
     <>
       <WelcomeHeader />
+      <IntelSection />
       <CategoryBar />
       <Column id={id} />
     </>

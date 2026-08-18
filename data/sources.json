@@ -1,0 +1,11 @@
+{
+  "version": "0.3.0",
+  "note": "V0.3 数据层来源元数据（仅描述，不覆盖 NewsNow 原有新闻源配置）。",
+  "sources": [
+    { "id": "hackernews", "name": "Hacker News", "enabled": true, "group": "科技" },
+    { "id": "github", "name": "GitHub", "enabled": true, "group": "开源" },
+    { "id": "ithome", "name": "IT之家", "enabled": true, "group": "科技" },
+    { "id": "baidu", "name": "百度热搜", "enabled": true, "group": "综合" },
+    { "id": "weibo", "name": "微博", "enabled": true, "group": "综合" }
+  ]
+}

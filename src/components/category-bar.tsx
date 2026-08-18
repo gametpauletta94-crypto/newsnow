@@ -1,6 +1,8 @@
 import { activeCategoryAtom, type ActiveCategory } from "~/atoms"
+import { loadTags } from "~/data"
 
-const CATEGORIES: ActiveCategory[] = [
+// 兜底分类：当 tags.json 缺失或为空时仍保证 6 个分类可用
+const FALLBACK_CATEGORIES: ActiveCategory[] = [
   { id: "ai-model", name: "AI模型", keywords: ["OpenAI", "ChatGPT", "Claude", "Gemini", "DeepSeek", "Qwen", "大模型", "GPT", "LLM", "Llama"] },
   { id: "ai-agent", name: "AI Agent", keywords: ["Agent", "智能体", "MCP", "Codex", "Claude Code", "Manus"] },
   { id: "ai-startup", name: "AI创业", keywords: ["AI创业", "AI SaaS", "一人公司", "AI应用", "AI startup"] },
@@ -8,6 +10,12 @@ const CATEGORIES: ActiveCategory[] = [
   { id: "future-tech", name: "未来科技", keywords: ["脑机接口", "Neuralink", "机器人", "具身智能", "意识上传", "量子"] },
   { id: "github-oss", name: "GitHub开源", keywords: ["GitHub", "Open Source", "AI开源", "开源"] },
 ]
+
+// 优先读取 tags.json；为空则回退到内置兜底，保证现有分类继续有效
+const CATEGORIES: ActiveCategory[] = (() => {
+  const fromData = loadTags()
+  return fromData.length ? fromData : FALLBACK_CATEGORIES
+})()
 
 export function CategoryBar() {
   const [active, setActive] = useAtom(activeCategoryAtom)

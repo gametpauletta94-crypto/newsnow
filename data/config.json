@@ -1,0 +1,9 @@
+{
+  "version": "0.3.0",
+  "dataModules": {
+    "dailySummary": true,
+    "githubTrend": true,
+    "hotTrend": true
+  },
+  "refreshIntervalMinutes": 30
+}

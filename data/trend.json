@@ -1,0 +1,41 @@
+{
+  "updatedAt": "2026-08-18T08:00:00Z",
+  "trends": [
+    {
+      "topic": "AI Agent 多智能体协作",
+      "heat": 9821,
+      "source": "Hacker News",
+      "url": "https://news.ycombinator.com"
+    },
+    {
+      "topic": "端侧大模型推理",
+      "heat": 8730,
+      "source": "GitHub",
+      "url": "https://github.com"
+    },
+    {
+      "topic": "RAG 检索增强落地",
+      "heat": 7654,
+      "source": "掘金",
+      "url": ""
+    },
+    {
+      "topic": "AI 编程助手",
+      "heat": 7012,
+      "source": "Twitter",
+      "url": ""
+    },
+    {
+      "topic": "具身智能机器人",
+      "heat": 6543,
+      "source": "arXiv",
+      "url": ""
+    },
+    {
+      "topic": "AI 教育个性化",
+      "heat": 5987,
+      "source": "36氪",
+      "url": ""
+    }
+  ]
+}

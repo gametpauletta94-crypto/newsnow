@@ -1,0 +1,45 @@
+{
+  "updatedAt": "2026-08-18T08:00:00Z",
+  "repos": [
+    {
+      "name": "ourongxing/newsnow",
+      "description": "Elegant reading of real-time news",
+      "stars": 12000,
+      "starsToday": 120,
+      "language": "TypeScript",
+      "url": "https://github.com/ourongxing/newsnow"
+    },
+    {
+      "name": "vllm-project/vllm",
+      "description": "High-throughput and memory-efficient LLM inference engine",
+      "stars": 35000,
+      "starsToday": 210,
+      "language": "Python",
+      "url": "https://github.com/vllm-project/vllm"
+    },
+    {
+      "name": "huggingface/transformers",
+      "description": "State-of-the-art ML models with a unified API",
+      "stars": 140000,
+      "starsToday": 95,
+      "language": "Python",
+      "url": "https://github.com/huggingface/transformers"
+    },
+    {
+      "name": "langchain-ai/langchain",
+      "description": "Build context-aware reasoning applications",
+      "stars": 98000,
+      "starsToday": 80,
+      "language": "Python",
+      "url": "https://github.com/langchain-ai/langchain"
+    },
+    {
+      "name": "microlinkhq/browserless",
+      "description": "Headless browser automation for scraping and AI agents",
+      "stars": 8000,
+      "starsToday": 45,
+      "language": "JavaScript",
+      "url": "https://github.com/microlinkhq/browserless"
+    }
+  ]
+}

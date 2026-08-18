@@ -1,0 +1,34 @@
+{
+  "categories": [
+    {
+      "id": "ai-model",
+      "name": "AI模型",
+      "keywords": ["OpenAI", "ChatGPT", "Claude", "Gemini", "DeepSeek", "Qwen", "大模型", "GPT", "LLM", "Llama"]
+    },
+    {
+      "id": "ai-agent",
+      "name": "AI Agent",
+      "keywords": ["Agent", "智能体", "MCP", "Codex", "Claude Code", "Manus"]
+    },
+    {
+      "id": "ai-startup",
+      "name": "AI创业",
+      "keywords": ["AI创业", "AI SaaS", "一人公司", "AI应用", "AI startup"]
+    },
+    {
+      "id": "edu-ai",
+      "name": "教育AI",
+      "keywords": ["AI教育", "智慧教育", "AI教师", "教育智能体", "AI 教育"]
+    },
+    {
+      "id": "future-tech",
+      "name": "未来科技",
+      "keywords": ["脑机接口", "Neuralink", "机器人", "具身智能", "意识上传", "量子"]
+    },
+    {
+      "id": "github-oss",
+      "name": "GitHub开源",
+      "keywords": ["GitHub", "Open Source", "AI开源", "开源"]
+    }
+  ]
+}
