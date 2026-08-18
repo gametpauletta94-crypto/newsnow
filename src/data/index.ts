@@ -1,9 +1,3 @@
-import dailyJson from "../../data/daily.json"
-import githubJson from "../../data/github.json"
-import trendJson from "../../data/trend.json"
-import tagsJson from "../../data/tags.json"
-import sourcesJson from "../../data/sources.json"
-import configJson from "../../data/config.json"
 import type { ActiveCategory } from "~/atoms"
 
 export interface TopEvent {
@@ -81,90 +75,82 @@ export interface AppConfig {
 }
 
 /**
- * V0.3 数据读取层。
- * 当前从本地 /data/*.json 静态导入（构建时打包进 bundle），暂不连接外部 API。
- * 每个 loader 都对缺失/异常做兜底，失败时返回空数据，绝不影响原新闻功能。
- * 后续如需接入 API，只需把静态导入换成 fetch("/data/xxx.json") 即可。
+ * V0.3.1 数据读取层（运行时加载）。
+ * 由 V0.3 的静态 import 改为运行时 fetch('/data/*.json')，
+ * 修改 JSON 无需重新构建即可生效。
+ *
+ * 设计原则：
+ * - 所有 loader 均为异步，失败时返回 null 或空结构，绝不影响原新闻功能。
+ * - fetch 使用 cache:'no-cache'，保证每次打开页面拿到最新 JSON。
+ * - 服务端渲染（SSR）不执行 useEffect，因此 fetch 仅在浏览器侧发生，无 SSR 取数问题。
  */
 
-export function loadDaily(): DailyData {
+const BASE = "/data"
+
+async function fetchJson<T>(file: string): Promise<T | null> {
   try {
-    const d = dailyJson as DailyData
-    return {
-      date: d.date ?? "",
-      title: d.title ?? "今日 AI 摘要",
-      summary: d.summary ?? "",
-      topEvents: Array.isArray(d.topEvents)
-        ? d.topEvents.filter(e => e && e.title)
-        : [],
-    }
+    const res = await fetch(`${BASE}/${file}`, { cache: "no-cache" })
+    if (!res.ok) return null
+    return (await res.json()) as T
   }
   catch {
-    return { title: "今日 AI 摘要", summary: "", topEvents: [] }
+    return null
   }
 }
 
-export function loadGithub(): GithubData {
-  try {
-    const d = githubJson as GithubData
-    return {
-      updatedAt: d.updatedAt ?? "",
-      repos: Array.isArray(d.repos)
-        ? d.repos.filter(r => r && r.name)
-        : [],
-    }
-  }
-  catch {
-    return { repos: [] }
+export async function loadDaily(): Promise<DailyData> {
+  const d = await fetchJson<DailyData>("daily.json")
+  if (!d) return { title: "今日 AI 摘要", summary: "", topEvents: [] }
+  return {
+    date: d.date ?? "",
+    title: d.title ?? "今日 AI 摘要",
+    summary: d.summary ?? "",
+    topEvents: Array.isArray(d.topEvents)
+      ? d.topEvents.filter(e => e && e.title)
+      : [],
   }
 }
 
-export function loadTrend(): TrendData {
-  try {
-    const d = trendJson as TrendData
-    return {
-      updatedAt: d.updatedAt ?? "",
-      trends: Array.isArray(d.trends)
-        ? d.trends.filter(t => t && t.topic)
-        : [],
-    }
-  }
-  catch {
-    return { trends: [] }
+export async function loadGithub(): Promise<GithubData> {
+  const d = await fetchJson<GithubData>("github.json")
+  if (!d) return { repos: [] }
+  return {
+    updatedAt: d.updatedAt ?? "",
+    repos: Array.isArray(d.repos)
+      ? d.repos.filter(r => r && r.name)
+      : [],
   }
 }
 
-export function loadTags(): ActiveCategory[] {
-  try {
-    const d = tagsJson as TagsData
-    const cats = Array.isArray(d.categories) ? d.categories : []
-    return cats
-      .filter(c => c && c.id && c.name)
-      .map(c => ({
-        id: String(c.id),
-        name: String(c.name),
-        keywords: Array.isArray(c.keywords) ? c.keywords.map(k => String(k)) : [],
-      }))
-  }
-  catch {
-    return []
+export async function loadTrend(): Promise<TrendData> {
+  const d = await fetchJson<TrendData>("trend.json")
+  if (!d) return { trends: [] }
+  return {
+    updatedAt: d.updatedAt ?? "",
+    trends: Array.isArray(d.trends)
+      ? d.trends.filter(t => t && t.topic)
+      : [],
   }
 }
 
-export function loadSources(): SourcesData {
-  try {
-    return sourcesJson as SourcesData
-  }
-  catch {
-    return {}
-  }
+export async function loadTags(): Promise<ActiveCategory[]> {
+  const d = await fetchJson<TagsData>("tags.json")
+  if (!d || !Array.isArray(d.categories)) return []
+  return d.categories
+    .filter(c => c && c.id && c.name)
+    .map(c => ({
+      id: String(c.id),
+      name: String(c.name),
+      keywords: Array.isArray(c.keywords) ? c.keywords.map(k => String(k)) : [],
+    }))
 }
 
-export function loadConfig(): AppConfig {
-  try {
-    return configJson as AppConfig
-  }
-  catch {
-    return {}
-  }
+export async function loadSources(): Promise<SourcesData> {
+  const d = await fetchJson<SourcesData>("sources.json")
+  return d ?? {}
+}
+
+export async function loadConfig(): Promise<AppConfig> {
+  const d = await fetchJson<AppConfig>("config.json")
+  return d ?? {}
 }

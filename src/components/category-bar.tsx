@@ -1,7 +1,7 @@
 import { activeCategoryAtom, type ActiveCategory } from "~/atoms"
 import { loadTags } from "~/data"
 
-// 兜底分类：当 tags.json 缺失或为空时仍保证 6 个分类可用
+// 兜底分类：当 tags.json 缺失/为空/加载失败时，仍保证 6 个分类可用
 const FALLBACK_CATEGORIES: ActiveCategory[] = [
   { id: "ai-model", name: "AI模型", keywords: ["OpenAI", "ChatGPT", "Claude", "Gemini", "DeepSeek", "Qwen", "大模型", "GPT", "LLM", "Llama"] },
   { id: "ai-agent", name: "AI Agent", keywords: ["Agent", "智能体", "MCP", "Codex", "Claude Code", "Manus"] },
@@ -11,18 +11,23 @@ const FALLBACK_CATEGORIES: ActiveCategory[] = [
   { id: "github-oss", name: "GitHub开源", keywords: ["GitHub", "Open Source", "AI开源", "开源"] },
 ]
 
-// 优先读取 tags.json；为空则回退到内置兜底，保证现有分类继续有效
-const CATEGORIES: ActiveCategory[] = (() => {
-  const fromData = loadTags()
-  return fromData.length ? fromData : FALLBACK_CATEGORIES
-})()
-
 export function CategoryBar() {
   const [active, setActive] = useAtom(activeCategoryAtom)
+  // 初始展示兜底分类，tags.json 加载成功后替换；加载失败则保持兜底
+  const [categories, setCategories] = useState<ActiveCategory[]>(FALLBACK_CATEGORIES)
+
+  useEffect(() => {
+    let alive = true
+    loadTags()
+      .then(c => { if (alive && c.length) setCategories(c) })
+      .catch(() => {})
+    return () => { alive = false }
+  }, [])
+
   return (
     <div className="mb-5 flex flex-wrap gap-2">
       <Chip label="全部" active={active === null} onClick={() => setActive(null)} />
-      {CATEGORIES.map(c => (
+      {categories.map(c => (
         <Chip
           key={c.id}
           label={c.name}
